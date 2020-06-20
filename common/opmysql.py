@@ -35,7 +35,7 @@ class OperationDbInterface(object):
             self.cur = self.conn.cursor()
         except pymysql.Error as e:
             print('创建数据库连接失败|Mysql Error %d: %s' % (e.args[0], e.args[1]))
-            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\syserror.log',
+            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
                                 levell=logging.DEBUG,
                                 format='%(asctime)s %(filename)s[line: %(lineo)d]%(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
@@ -54,7 +54,7 @@ class OperationDbInterface(object):
         except pymysql.Error as e:
             result = {'code': '9999', 'message': '执行操作异常', 'data': []}
             print('数据库错误|op_sql %d: %s' % (e.args[0], e.args[1]))
-            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\syserror.log',
+            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
                                 levell=logging.DEBUG,
                                 format='%(asctime)s %(filename)s[line: %(lineo)d] %(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
@@ -78,7 +78,7 @@ class OperationDbInterface(object):
             self.conn.rollback()  # 回滚
             result = {'code': '9999', 'message': '执行操作异常', 'data': []}
             print('数据库错误|select_one %d: %s' % (e.args[0], e.args[1]))
-            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\syserror.log',
+            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
                                 levell=logging.DEBUG,
                                 format='%(asctime)s %(filename)s[line: %(lineo)d] %(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
@@ -102,7 +102,7 @@ class OperationDbInterface(object):
         except pymysql.Error as e:
             self.conn.rollback()  # 回滚
             result = {'code': '9999', 'message': '执行操作异常', 'data': []}
-            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\syserror.log',
+            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
                                 levell=logging.DEBUG,
                                 format='%(asctime)s %(filename)s[line: %(lineo)d] %(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
@@ -124,7 +124,7 @@ class OperationDbInterface(object):
         except pymysql.Error as e:
             self.conn.rollback()  # 回滚
             result = {'code': '9999', 'message': '执行操作异常', 'data': []}
-            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\syserror.log',
+            logging.basicConfig(filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
                                 levell=logging.DEBUG,
                                 format='%(asctime)s %(filename)s[line: %(lineo)d] %(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
