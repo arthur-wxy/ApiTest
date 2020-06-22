@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-
+import json
 import requests
 import os
 import logging
@@ -127,14 +127,18 @@ if __name__ == '__main__':
     test_interface = RequestInterface()
     test_db = opmysql.OperationDbInterface(host_db='10.2.12.132', user_db='root', password_db='123456',
                                            name_db='test_interface', port_db='3306', link_type=0)
-    sen_sql = "select exe_mode, url_interface, header_interface, params_interface, from case_interface where name_interface='mystest1' and id=1"
+    sen_sql = "select exe_mode, url_interface, header_interface, params_interface from case_interface where name_interface='getIpInfo.php' and id=4"
     params_interface = test_db.select_one(sen_sql)
+    # print(params_interface)
+    # print('exe_mode' in params_interface)
     if params_interface['code'] == '0000':
         url_interface = params_interface['data']['url_interface']
         temp = params_interface['data']['header_interface']
         header_data = eval(params_interface['data']['header_interface'])
-        params_interface = params_interface['data']['params_interface']
-        type_interface = params_interface['data']['exe_code']
+        param_interface = params_interface['data']['params_interface']
+        # print(params_interface)
+        type_interface = params_interface['data']['exe_mode']
+        # print(params_interface)
         if url_interface != '' and header_data != '' and params_interface != '' and type_interface != '':
             result = test_interface.http_request(interface_url=url_interface, header_data=header_data,
                                                  interface_param=params_interface, request_type=type_interface)
