@@ -23,7 +23,7 @@ class RequestInterface(object):
             logging.basicConfig(
                 filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
                 level=logging.DEBUG,
-                format='%(asctime)s %(filename)s[line: %(lineo)d] %(levelname)s %(message)s')
+                format='%(asctime)s %(filename)s[line: %(lineno)d] %(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
             logger.exception(error)
         return new_param
@@ -55,7 +55,7 @@ class RequestInterface(object):
             logging.basicConfig(
                 filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
                 level=logging.DEBUG,
-                format='%(asctime)s %(filename)s[line: %(lineo)d] %(levelname)s %(message)s')
+                format='%(asctime)s %(filename)s[line: %(lineno)d] %(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
             logger.exception(error)
         return result
@@ -91,7 +91,7 @@ class RequestInterface(object):
             logging.basicConfig(
                 filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
                 level=logging.DEBUG,
-                format='%(asctime)s %(filename)s[line: %(lineo)d] %(levelname)s %(message)s')
+                format='%(asctime)s %(filename)s[line: %(lineno)d] %(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
             logger.exception(error)
         return result
@@ -117,7 +117,7 @@ class RequestInterface(object):
             logging.basicConfig(
                 filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
                 level=logging.DEBUG,
-                format='%(asctime)s %(filename)s[line: %(lineo)d] %(levelname)s %(message)s')
+                format='%(asctime)s %(filename)s[line: %(lineno)d] %(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
             logger.exception(error)
         return result
