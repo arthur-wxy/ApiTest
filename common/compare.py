@@ -146,3 +146,8 @@ class CompareParam(object):
                     list_params_to_compare = eval(self.params_to_compare)  # 将数据库中的unicode转换成原列表
                     if set(list_params_to_compare).issubset(set(temp_result_list_response)):  # 判断集合的包含关系
                         result = {'code': '0000', 'message': '参数完整性一致', 'data': []}
+                        operation_db.op_sql("update case_interface set params_actual='%s',"
+                                            "params_compare_result=%s where id=%s"
+                                            % (temp_result_list_response, 1, self.id_case))
+                    else:
+                        pass
