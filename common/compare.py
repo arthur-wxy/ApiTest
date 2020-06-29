@@ -150,4 +150,4 @@ class CompareParam(object):
                                             "params_compare_result=%s where id=%s"
                                             % (temp_result_list_response, 1, self.id_case))
                     else:
-                        pass
+
