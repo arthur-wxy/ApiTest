@@ -150,5 +150,28 @@ class CompareParam(object):
                                             "params_compare_result=%s where id=%s"
                                             % (temp_result_list_response, 1, self.id_case))
                     else:
-                        pass
+                        result = {'code': '3001', 'message': '实际结果中元素不都在预期结果中', 'data': []}
+                        operation_db.op_sql("update case_interface set params_actual='%s',"
+                                            "params_compare_result=%s where id=%s"
+                                            % (temp_result_list_response, 0, self.id_case))
+                else:
+                    result = {'code': '4001', 'message': '用例中待比较的参数集错误', 'data': []}
+                    # operation_db.op_sql("update case_interface set params_actual='%s',"
+                    #                     "params_compare_result=%s where id=%s"
+                    #                     % (temp_result_list_response, 0, self.id_case))
+            else:
+                result = {'code': '2001', 'message': '调用recur方法返回错误', 'data': []}
+                operation_db.op_sql("update case_interface set params_compare_result=%s where id=%s"
+                                    % (2, self.id_case))
+        except Exception as error:
+            result = {'code': '9999', 'message': '参数完整性比较异常', 'data': []}
+            logging.basicConfig(
+                filename=config.src_path + '/Users/arthurw/PycharmProjects/ApiTest/log/syserror.log',
+                level=logging.DEBUG,
+                format='%(asctime)s %(filename)s[line: %(lineno)d] %(levelname)s %(message)s')
+            logger = logging.getLogger(__name__)
+            logger.exception(error)
+        finally:
+            return result
+
 
