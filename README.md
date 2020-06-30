@@ -2,3 +2,8 @@
 
 python操作mysql
 
+用python发送http请求
+
+用python处理http返回包
+
+用python到处测试数据
