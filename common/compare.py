@@ -175,3 +175,14 @@ class CompareParam(object):
             return result
 
 
+if __name__ == '__main__':
+    sen_sql = "select * from case_interface where name_interface='getIpInfo.php' and id=1"
+    params_interface = operation_db.select_one(sen_sql)
+    result_interface = params_interface['data']['result_interface']
+    test_compare_param = CompareParam(params_interface['data'])
+    code_compare_result = test_compare_param.compare_code(result_interface)
+    print(code_compare_result)
+    result_compare_params_complete = test_compare_param.compare_params_complete(result_interface)
+    print(result_compare_params_complete)
+
+
