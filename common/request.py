@@ -115,7 +115,7 @@ class RequestInterface(object):
         except Exception as error:
             result = {'code': '9999', 'message': '系统异常', 'data': []}
             logging.basicConfig(
-                filename=config.src_path + 'C:\\Users\\user\\Desktop\\test_interface\\log\\syserror.log',
+                filename=config.src_path + '/Users/arthurw/PycharmProjects/ApiTest/syserror.log',
                 level=logging.DEBUG,
                 format='%(asctime)s %(filename)s[line: %(lineno)d] %(levelname)s %(message)s')
             logger = logging.getLogger(__name__)
@@ -123,32 +123,42 @@ class RequestInterface(object):
         return result
 
 
+# if __name__ == '__main__':
+#     test_interface = RequestInterface()
+#     test_db = opmysql.OperationDbInterface(host_db='10.2.12.132', user_db='root', password_db='123456',
+#                                            name_db='test_interface', port_db='3306', link_type=0)
+#     sen_sql = "select exe_mode, url_interface, header_interface, params_interface from case_interface where name_interface='getIpInfo.php' and id=4"
+#     params_interface = test_db.select_one(sen_sql)
+#     # print(params_interface)
+#     # print('exe_mode' in params_interface)
+#     if params_interface['code'] == '0000':
+#         url_interface = params_interface['data']['url_interface']
+#         temp = params_interface['data']['header_interface']
+#         header_data = eval(params_interface['data']['header_interface'])
+#         param_interface = params_interface['data']['params_interface']
+#         # print(params_interface)
+#         type_interface = params_interface['data']['exe_mode']
+#         # print(params_interface)
+#         if url_interface != '' and header_data != '' and params_interface != '' and type_interface != '':
+#             result = test_interface.http_request(interface_url=url_interface, header_data=header_data,
+#                                                  interface_param=params_interface, request_type=type_interface)
+#             if result['code'] == '0000':
+#                 result_resp = result['data']
+#                 test_db.op_sql("update case_interface set result_interface='%s' where id=1" % result_resp)  # 更新结果
+#                 print('处理http请求成功，返回数据是: %s' % result_resp)
+#             else:
+#                 print('处理请求失败')
+#         else:
+#             print('测试数据中有空值')
+#     else:
+#         print('获取接口测试用例数据失败')
+
+
 if __name__ == '__main__':
-    test_interface = RequestInterface()
+    r = RequestInterface()
+    resp = r.http_request(interface_url='http://ip.taobao.com/service/getIpInfo.php', header_data={'HOST': 'ip.taobao.com'},
+               interface_param='ip=63.223.108.4', request_type='GET')
+    res = resp['data']
     test_db = opmysql.OperationDbInterface(host_db='10.2.12.132', user_db='root', password_db='123456',
-                                           name_db='test_interface', port_db='3306', link_type=0)
-    sen_sql = "select exe_mode, url_interface, header_interface, params_interface from case_interface where name_interface='getIpInfo.php' and id=4"
-    params_interface = test_db.select_one(sen_sql)
-    # print(params_interface)
-    # print('exe_mode' in params_interface)
-    if params_interface['code'] == '0000':
-        url_interface = params_interface['data']['url_interface']
-        temp = params_interface['data']['header_interface']
-        header_data = eval(params_interface['data']['header_interface'])
-        param_interface = params_interface['data']['params_interface']
-        # print(params_interface)
-        type_interface = params_interface['data']['exe_mode']
-        # print(params_interface)
-        if url_interface != '' and header_data != '' and params_interface != '' and type_interface != '':
-            result = test_interface.http_request(interface_url=url_interface, header_data=header_data,
-                                                 interface_param=params_interface, request_type=type_interface)
-            if result['code'] == '0000':
-                result_resp = result['data']
-                test_db.op_sql("update case_interface set result_interface='%s' where id=1" % result_resp)  # 更新结果
-                print('处理http请求成功，返回数据是: %s' % result_resp)
-            else:
-                print('处理请求失败')
-        else:
-            print('测试数据中有空值')
-    else:
-        print('获取接口测试用例数据失败')
+                                            name_db='test_interface', port_db=3306, link_type=0)
+    test_db.op_sql("update case_interface set result_interface='%s' where id=4".format(res))
